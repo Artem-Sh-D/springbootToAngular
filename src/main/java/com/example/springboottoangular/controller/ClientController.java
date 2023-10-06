@@ -27,8 +27,8 @@ public class ClientController {
         return clientService.getClients();
     }
 
-    @PostMapping("/create")
+    /*@PostMapping("/create")
     public void setUser(@RequestBody DtoClient.DtoClientCreate dtoClient) {
         clientService.save(dtoClient);
-    }
+    }*/
 }

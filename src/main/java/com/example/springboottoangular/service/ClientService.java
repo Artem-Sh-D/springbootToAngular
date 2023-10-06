@@ -21,9 +21,6 @@ public class ClientService {
     }
 
     public void save(DtoClient dtoClient) {
-        passportRepository.save(passport);
-        client.setPassport(passport);
-        clientRepository.save(client);
     }
 
     public List<Client> getClients() {
