@@ -1,6 +1,9 @@
 package com.example.springboottoangular.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import org.springframework.format.annotation.NumberFormat;
 
 import java.util.List;
 
@@ -11,12 +14,15 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Firstname is not be empty")
     private String firstname;
-
+    @NotBlank(message = "Lastname is not be empty")
     private String lastname;
 
+    @Email
     private String email;
 
+    @NotBlank(message = "PhoneNumber is not be empty")
     private String phoneNumber;
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private List<BankAccount> bankAccounts;

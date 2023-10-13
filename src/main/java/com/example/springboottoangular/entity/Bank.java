@@ -1,6 +1,10 @@
 package com.example.springboottoangular.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.List;
 
@@ -11,22 +15,26 @@ public class Bank {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Name is not be empty")
+    @Length(min = 2, max = 15)
     private String name;
-
+    @NotBlank(message = "Address is not be empty")
+    @Length(min = 10, max = 25)
     private String address;
 
-    private String status;
+    private Boolean isActive;
 
-    @OneToMany(mappedBy = "bank", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bank", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     private List<BankAccount> bankAccounts;
 
     public Bank() {
     }
 
-    public Bank( String name, String address, String status) {
+    public Bank( String name, String address, Boolean isActive) {
         this.name = name;
         this.address = address;
-        this.status = status;
+        this.isActive = isActive;
     }
 
     public String getName() {
@@ -45,12 +53,12 @@ public class Bank {
         this.address = address;
     }
 
-    public String getStatus() {
-        return status;
+    public Boolean getActive() {
+        return isActive;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 
     public void setId(Long id) {

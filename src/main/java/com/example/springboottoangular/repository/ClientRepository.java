@@ -7,11 +7,12 @@ import java.util.Optional;
 
 public interface ClientRepository extends JpaRepository<Client,Long> {
 
-    public Client findUserByFirstname(String firstName);
 
-    public Optional<Client> findUserByLastname(String lastName);
+    Optional<Client> findClientByFirstnameAndLastname(String firstname, String lastname);
 
-    public Optional<Client> findUserByEmail(String email);
+    Optional<Client> findClientByEmail(String email);
 
-    public Optional<Client> findUserByPhoneNumber(String phoneNumber);
+    Optional<Client> findClientByPhoneNumber(String phoneNumber);
+
+
 }
