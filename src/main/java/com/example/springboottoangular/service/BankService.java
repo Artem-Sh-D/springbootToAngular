@@ -3,6 +3,7 @@ package com.example.springboottoangular.service;
 import com.example.springboottoangular.entity.Bank;
 import com.example.springboottoangular.repository.BankRepository;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -17,7 +18,7 @@ public class BankService {
     }
 
     public Bank getBank(String name) {
-        return bankRepository.findBankByName(name).orElseThrow(() -> ResponseStatusException());
+        return bankRepository.findBankByName(name).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Bank in not found"));
     }
 
     public void createBank(@Valid Bank bank) {

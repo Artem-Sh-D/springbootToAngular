@@ -17,6 +17,6 @@ public class PassportService {
     }
 
     public Passport getPassport(String series, String number) {
-      return passportRepository.findBySeriesAndNumber(series, number);
+      return null;
     }
 }

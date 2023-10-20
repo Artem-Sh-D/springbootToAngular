@@ -1,10 +1,8 @@
 package com.example.springboottoangular.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.Length;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -15,11 +13,11 @@ public class Bank {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Name is not be empty")
-    @Length(min = 2, max = 15)
+    @NotBlank(message = "Name is mandatory")
+    @Size(min = 2, max = 20, message = "Name must be between 2 and 20 characters")
     private String name;
     @NotBlank(message = "Address is not be empty")
-    @Length(min = 10, max = 25)
+    @Size(min = 10, max = 100, message = "Address must be between 20 and 100 characters")
     private String address;
 
     private Boolean isActive;

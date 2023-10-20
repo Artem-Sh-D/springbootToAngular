@@ -25,31 +25,20 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-    public Client getClientByFirstnameAndLastname(String firstname, String lastname) {
-        return clientRepository.findClientByFirstnameAndLastname(firstname,lastname).
+    public Client getClientById(Long id) {
+        return clientRepository.findById(id).
                 orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found"));
 
     }
 
-    public Client getClientByEmail(String email) {
-        return clientRepository.findClientByEmail(email).
-                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found"));
-
-    }
-
-    public Client getClientByPhoneNumber(String phoneNumber) {
-        return clientRepository.findClientByPhoneNumber(phoneNumber).
-                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found"));
-
-    }
-
-    public void deleteClient(Long id) {
+    public boolean deleteClient(Long id) {
        clientRepository.delete(clientRepository.findById(id).
                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found")));
+       return true;
     }
 
-    public updateClient updateClient(Long id, Client updateClient) {
+    public Client updateClient(Long id, Client updateClient) {
         Client client = clientRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found"));
-        clientRepository.save(updateClient);
+        return null;
     }
 }

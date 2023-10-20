@@ -5,6 +5,7 @@ import com.example.springboottoangular.dto.DtoUpdateClient;
 import com.example.springboottoangular.entity.Client;
 import com.example.springboottoangular.service.ClientService;
 import jakarta.persistence.PostUpdate;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,10 +21,9 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping("/{firstname}/{lastname}")
-     ResponseEntity<?> getClient(@PathVariable String firstname, @PathVariable String lastname ) {
-        clientService.getClientByFirstnameAndLastname(firstname,lastname);
-        return ResponseEntity.ok("Success");
+    @GetMapping("/{id}")
+     ResponseEntity<?> getClient(@PathVariable Long id) {
+        return new ResponseEntity<>(clientService.getClientById(id), HttpStatus.OK);
     }
 
     @GetMapping("/allclient")
@@ -38,7 +38,8 @@ public class ClientController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createUser(@RequestBody Client client) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<?> createClient(@RequestBody Client client) {
             clientService.save(client);
             return ResponseEntity.ok("Client create");
         }
